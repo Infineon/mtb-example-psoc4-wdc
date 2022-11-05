@@ -7,7 +7,7 @@
 * Related Document: See README.md
 *
 *******************************************************************************
-* Copyright 2021, Cypress Semiconductor Corporation (an Infineon company) or
+* Copyright 2021-2022, Cypress Semiconductor Corporation (an Infineon company) or
 * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
 *
 * This software, including source code, documentation and related
@@ -78,7 +78,7 @@ void wdc_interrupt_handler(void)
 {
     uint32_t status = Cy_WDC_GetInterruptStatus(WCO);
     if((status & CY_WDC_COUNTER0_Msk) != 0)
-    {        
+    {
         /* Set the flag to perform ILO Compensation. ILO Compensation is
          * performed every time Counter0 interrupt occurs.
          */
@@ -121,7 +121,7 @@ int main(void)
     uint32_t temp_ilo_counts = 0u;
 
     /* Initialize the device and board peripherals */
-    result = cybsp_init() ;
+    result = cybsp_init();
     if (result != CY_RSLT_SUCCESS)
     {
         CY_ASSERT(0);
@@ -167,7 +167,7 @@ int main(void)
             /* Get the ILO compensated counts i.e. the actual counts for the desired delay */
             if(CY_SYSCLK_SUCCESS == Cy_SysClk_IloCompensate(COUNTER0_DELAY_US, &temp_ilo_counts))
             {
-                ilo_compensated_counts = (uint32)temp_ilo_counts;
+                ilo_compensated_counts = (uint32_t)temp_ilo_counts;
                 /* Update the match value of Counter0. As the counters are cascaded, the
                  * counters Counter1 and Counter2 are dependent on Counter0 match value
                  * and need not be modified.
